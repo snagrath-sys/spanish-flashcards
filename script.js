@@ -61,6 +61,42 @@ class FlashcardApp {
                 this.flipCard(flashcard);
             }
         });
+
+        // Export button
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            this.exportData();
+        });
+
+        // Import button
+        document.getElementById('importBtn').addEventListener('click', () => {
+            this.showImportModal();
+        });
+
+        // Import modal events
+        document.querySelector('.close-import').addEventListener('click', () => {
+            this.hideImportModal();
+        });
+
+        document.getElementById('cancelImport').addEventListener('click', () => {
+            this.hideImportModal();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                this.importData(e.target.files[0]);
+            }
+        });
+
+        document.getElementById('importFromText').addEventListener('click', () => {
+            this.importFromText();
+        });
+
+        // Close import modal when clicking outside
+        document.getElementById('importModal').addEventListener('click', (e) => {
+            if (e.target.id === 'importModal') {
+                this.hideImportModal();
+            }
+        });
     }
 
     showAddModal() {
@@ -71,6 +107,16 @@ class FlashcardApp {
     hideAddModal() {
         document.getElementById('addCardModal').style.display = 'none';
         document.getElementById('addCardForm').reset();
+    }
+
+    showImportModal() {
+        document.getElementById('importModal').style.display = 'block';
+    }
+
+    hideImportModal() {
+        document.getElementById('importModal').style.display = 'none';
+        document.getElementById('fileInput').value = '';
+        document.getElementById('jsonTextarea').value = '';
     }
 
     addCard() {
@@ -292,6 +338,7 @@ class FlashcardApp {
                     this.saveToStorage();
                     this.render();
                     this.updateStats();
+                    this.hideImportModal();
                     this.showNotification('Cards imported successfully!');
                 } else {
                     throw new Error('Invalid file format');
@@ -301,6 +348,31 @@ class FlashcardApp {
             }
         };
         reader.readAsText(file);
+    }
+
+    // Import from text area
+    importFromText() {
+        const jsonText = document.getElementById('jsonTextarea').value.trim();
+        if (!jsonText) {
+            this.showNotification('Please paste JSON data first.', 'error');
+            return;
+        }
+
+        try {
+            const importedCards = JSON.parse(jsonText);
+            if (Array.isArray(importedCards)) {
+                this.flashcards = importedCards;
+                this.saveToStorage();
+                this.render();
+                this.updateStats();
+                this.hideImportModal();
+                this.showNotification('Cards imported successfully!');
+            } else {
+                throw new Error('Invalid JSON format');
+            }
+        } catch (error) {
+            this.showNotification('Error importing cards. Please check the JSON format.', 'error');
+        }
     }
 
     // Clear all data

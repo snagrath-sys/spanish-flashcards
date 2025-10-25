@@ -1,0 +1,20 @@
+{
+  "name": "spanish-flashcards",
+  "version": "1.0.0",
+  "description": "A minimal web app for learning Spanish vocabulary with interactive flashcards",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'No build step needed for static app'",
+    "deploy": "echo 'Push to GitHub and enable Pages in repository settings'"
+  },
+  "keywords": ["flashcards", "spanish", "learning", "vocabulary", "web-app"],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/spanish-flashcards.git"
+  },
+  "homepage": "https://yourusername.github.io/spanish-flashcards"
+}

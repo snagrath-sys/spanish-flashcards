@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spanish Flashcards</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
 </head>
 <body>
     <div class="container">
@@ -15,8 +17,12 @@
 
         <div class="controls">
             <button id="addCardBtn" class="btn btn-primary">+ Add New Card</button>
-            <div class="stats">
-                <span id="cardCount">0 cards</span>
+            <div class="controls-right">
+                <button id="exportBtn" class="btn btn-secondary" title="Export your cards">📤 Export</button>
+                <button id="importBtn" class="btn btn-secondary" title="Import cards">📥 Import</button>
+                <div class="stats">
+                    <span id="cardCount">0 cards</span>
+                </div>
             </div>
         </div>
 
@@ -43,6 +49,29 @@
                         <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- Import Modal -->
+        <div id="importModal" class="modal">
+            <div class="modal-content">
+                <span class="close-import">&times;</span>
+                <h2>Import Flashcards</h2>
+                <div class="import-options">
+                    <div class="import-method">
+                        <h3>Upload JSON File</h3>
+                        <input type="file" id="fileInput" accept=".json" />
+                        <p class="help-text">Select a JSON file exported from this app</p>
+                    </div>
+                    <div class="import-method">
+                        <h3>Paste JSON Data</h3>
+                        <textarea id="jsonTextarea" placeholder="Paste your exported JSON data here..." rows="6"></textarea>
+                        <button type="button" class="btn btn-primary" id="importFromText">Import from Text</button>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelImport">Cancel</button>
+                </div>
             </div>
         </div>
 
