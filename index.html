@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Flashcards</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🇪🇸 Spanish Flashcards</h1>
+            <p>Click cards to flip and reveal translations</p>
+        </header>
+
+        <div class="controls">
+            <button id="addCardBtn" class="btn btn-primary">+ Add New Card</button>
+            <div class="stats">
+                <span id="cardCount">0 cards</span>
+            </div>
+        </div>
+
+        <div class="flashcards-grid" id="flashcardsGrid">
+            <!-- Flashcards will be dynamically generated here -->
+        </div>
+
+        <!-- Add Card Modal -->
+        <div id="addCardModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add New Flashcard</h2>
+                <form id="addCardForm">
+                    <div class="form-group">
+                        <label for="spanishWord">Spanish Word:</label>
+                        <input type="text" id="spanishWord" placeholder="e.g., hola" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="englishWord">English Translation:</label>
+                        <input type="text" id="englishWord" placeholder="e.g., hello" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Add Card</button>
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state">
+            <div class="empty-icon">📚</div>
+            <h2>No flashcards yet!</h2>
+            <p>Create your first Spanish flashcard to get started</p>
+            <button class="btn btn-primary" onclick="document.getElementById('addCardBtn').click()">
+                Add Your First Card
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
